@@ -347,6 +347,8 @@ To write this function, we'll consider the length of the list of arguments. If t
 combineList Nil = pure Nil
 ```
 
+Here, `combineList` takes `Nil` as an element of `List (f a)`, `Nil::f a`, 
+and returns the wrapped empty list `Nil::f (List a)`. 
 In fact, this is the only thing we can do!
 
 If the list is non-empty, then we have a head element, which is a wrapped argument of type `f a`, and a tail of type `List (f a)`. We can recursively combine the effects in the tail, giving a result of type `f (List a)`. We can then use `<$>` and `<*>` to lift the `Cons` constructor over the head and new tail:
